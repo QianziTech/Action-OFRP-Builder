@@ -14,7 +14,7 @@ on:
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/QianziTech/android_device_oplus_ossi'
+        default: 'https://github.com/QianziTech/android_device_oplus_dunhuang'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
@@ -22,7 +22,7 @@ on:
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
-        default: 'device/oplus/ossi'
+        default: 'device/oplus/dunhuang'
       COMMON_TREE_URL:
         description: 'COMMON_TREE_URL (if no common tree, leave blank)'
         required: false
@@ -32,11 +32,11 @@ on:
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
-        default: 'ossi'
+        default: 'dunhuang'
       MAKEFILE_NAME:
         description: 'MAKEFILE_NAME'
         required: true
-        default: 'omni_ossi'
+        default: 'twrp_dunhuang'
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
@@ -49,7 +49,19 @@ jobs:
     permissions:
       contents: write
     steps:
- 
+    - name: Show Building info
+      run: |
+        echo "::group::User Environment Variables"
+        echo "Manifest URL: ${{ github.event.inputs.MANIFEST_URL }}"
+        echo "Manifest Branch: ${{ github.event.inputs.MANIFEST_BRANCH }}"
+        echo "Device Tree URL: ${{ github.event.inputs.DEVICE_TREE_URL }}"
+        echo "Device Tree Branch: ${{ github.event.inputs.DEVICE_TREE_BRANCH }}"
+        echo "设备树源码: ${{ github.event.inputs.DEVICE_PATH }}"
+        echo "设备代号: ${{ github.event.inputs.DEVICE_NAME }}"
+        echo "构建设备: ${{ github.event.inputs.MAKEFILE_NAME }}"
+        echo "构建类型: ${{ github.event.inputs.BUILD_TARGET }}.img"
+        echo "::endgroup::"
+      
     # You might want to Checkout your repo first, but not mandatory
     - name: Check Out
       uses: actions/checkout@v4
